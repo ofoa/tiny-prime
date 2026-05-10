@@ -74,7 +74,7 @@ LL:
     add     rbx, rax              ;RBX point to the address of upper limit
     not     byte [rax + 1]        ;1 is not a prime number
 _loop:                            ;Main loop ,iterate through all numbers
-    inc   rbp                     ;RBP is not an address, just the number with condition
+    inc   rbp                     ;RBP is not an address, just the number to be judged
     inc   rax
     cmp   [rax], dh               ;dh == 0, if(*num != 0) continue;
     jne   loop_jump
