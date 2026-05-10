@@ -2,7 +2,7 @@
 ;;GNU GENERAL PUBLIC LICENSE
 ;;Version 3, 29 June 2007
 ;;
-;;166B x86-64 Ehrlich Sieve Method Prime Number Calculator On Linux
+;;An 166B x86-64 Ehrlich Sieve Method Prime Number Calculator On Linux
 ;;To build: nasm -f bin prime-x64.s -o prime-x64
 ;;
 ;;The ELF header and program header table of this program are as follows
@@ -21,7 +21,7 @@ BITS 64
 _start:
     dd      0x464c457F            ;ELF Magic Number
     push    rsp
-    pop     rsi                   ;= mov rsi, rsp, set RSI to some buffer memory location
+    pop     rsi                   ;= mov rsi, rsp; set RSI to some buffer memory location
     mov     dl, 20                ;Buffer size = 20
     syscall                       ;rax = 0, sys_read
 
@@ -74,7 +74,7 @@ LL:
     add     rbx, rax              ;RBX point to the address of upper limit
     not     byte [rax + 1]        ;1 is not a prime number
 _loop:                            ;Main loop ,iterate through all numbers
-    inc   r9                      ;R9 is the number with condition
+    inc   rbp                     ;RBP is not an address, just the number with condition
     inc   rax
     cmp   [rax], dh               ;dh == 0, if(*num != 0) continue;
     jne   loop_jump
@@ -82,7 +82,7 @@ _loop:                            ;Main loop ,iterate through all numbers
     push  rsi
     push  rax
 _loop2:                           ;Key logic of the Ehrlich Sieve Method
-    add rax, r9
+    add rax, rbp
     cmp rax, rbx
     jg  _break
     mov [rax], dl                 ;dl != 0, *num = (something not zero)
@@ -90,7 +90,8 @@ _loop2:                           ;Key logic of the Ehrlich Sieve Method
 _break:
 
 
-    mov   rax, r9                 ;Move the prime number to RAX
+    push rbp
+    pop rax                       ;= mov rax, rbp; Move the prime number to RAX for the div operation
     mov   cl, 1  
                    
 ;;When Using sys_read to get a string, Linux will preserve the '\n' you type at the end
