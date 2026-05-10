@@ -41,7 +41,7 @@ _start:
 scan_dec_loop:                    ;This loop is to change the ascii input to the number in RBX
     imul    rbx, r15              ;RBX *= 10
     push    rsi                   ;It will be easier to understand if move this instraction and following 
-                                  ;"push rbx" in front of "pop rsi", they just aim to mov rsi, rbx; push rsi
+                                  ;"push rbx" in front of "pop rsi", they just aim to push rsi; mov rsi, rbx
                                   ;We will push some garbage on stack, but it doesn't matter
     cmp     eax, 0x00010038       ;ELF informations
     sub     al, '0'               ;Now RAX is the number of the digit pointed by RSI 
