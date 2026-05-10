@@ -2,7 +2,7 @@
 ;;GNU GENERAL PUBLIC LICENSE
 ;;Version 3, 29 June 2007
 ;;
-;;An 166B x86-64 Ehrlich Sieve Method Prime Number Calculator On Linux
+;;An 165B x86-64 Ehrlich Sieve Method Prime Number Calculator On Linux
 ;;To build: nasm -f bin prime-x64.s -o prime-x64
 ;;
 ;;The ELF header and program header table of this program are as follows
